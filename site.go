@@ -4,8 +4,6 @@ import (
 	"bytes"
 	"html/template"
 	"net/http"
-
-	"github.com/fuzzingbits/forge"
 )
 
 // Site is a philote site
@@ -20,7 +18,8 @@ type Site struct {
 func (site *Site) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	taxonomy, found := site.pathMap[r.URL.Path]
 	if !found {
-		forge.RespondText(w, http.StatusNotFound, []byte("philote not found"))
+		w.WriteHeader(http.StatusNotFound)
+		w.Write([]byte("philote not found"))
 		return
 	}
 
@@ -32,7 +31,9 @@ func (site *Site) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		panic(err)
 	}
 
-	forge.RespondHTML(w, http.StatusOK, buffer.Bytes())
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
+	w.WriteHeader(http.StatusOK)
+	w.Write(buffer.Bytes())
 }
 
 // Prime the site
