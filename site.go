@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"html/template"
 	"net/http"
+	"time"
 )
 
 // Site is a philote site
@@ -16,15 +17,23 @@ type Site struct {
 
 // ServeHTTP the site based on the path provided
 func (site *Site) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	statusCode := http.StatusOK
+
 	taxonomy, found := site.pathMap[r.URL.Path]
 	if !found {
-		w.WriteHeader(http.StatusNotFound)
-		w.Write([]byte("philote not found"))
-		return
+		statusCode = http.StatusNotFound
+		taxonomy = &Taxonomy{
+			FrontMatter: &FrontMatter{
+				Title: "404 Not Found",
+				Date:  time.Now(),
+			},
+			Markdown: "The requested page was not found.",
+		}
 	}
 
 	buffer := bytes.NewBuffer([]byte{})
 	err := site.Template.Execute(buffer, TemplatePayload{
+		Site:     site,
 		Taxonomy: taxonomy,
 	})
 	if err != nil {
@@ -32,7 +41,7 @@ func (site *Site) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
-	w.WriteHeader(http.StatusOK)
+	w.WriteHeader(statusCode)
 	w.Write(buffer.Bytes())
 }
 
