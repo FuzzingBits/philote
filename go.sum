@@ -1,5 +1,5 @@
-github.com/fuzzingbits/forge v0.0.6 h1:Ovm+tu8rrjQXqWUi0NUSJbHxvLwSelLDV2m8f+gSBHI=
-github.com/fuzzingbits/forge v0.0.6/go.mod h1:bIkf7p91AJlo0e81Kpj/siieDUiDKy0dBIKtUgqnV5U=
+github.com/fuzzingbits/forge v0.0.8 h1:/Mj6wWWkKVSbZrla1VFFDyDHKjJtxcOFanCAhHKrNBQ=
+github.com/fuzzingbits/forge v0.0.8/go.mod h1:bIkf7p91AJlo0e81Kpj/siieDUiDKy0dBIKtUgqnV5U=
 github.com/russross/blackfriday v1.6.0 h1:KqfZb0pUVN2lYqZUYRddxF4OR8ZMURnJIG5Y3VRLtww=
 github.com/russross/blackfriday v1.6.0/go.mod h1:ti0ldHuxg49ri4ksnFxlkCfN+hvslNlmVHqNRXXJNAY=
 gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405 h1:yhCVgyC4o1eVCa2tZl7eS0r+SDo693bJlVdllGtEeKM=
