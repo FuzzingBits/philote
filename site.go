@@ -5,6 +5,8 @@ import (
 	"html/template"
 	"net/http"
 	"time"
+
+	"github.com/fuzzingbits/forge"
 )
 
 // Site is a philote site
@@ -40,9 +42,7 @@ func (site *Site) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		panic(err)
 	}
 
-	w.Header().Set("Content-Type", "text/html; charset=utf-8")
-	w.WriteHeader(statusCode)
-	w.Write(buffer.Bytes())
+	forge.RespondHTML(w, statusCode, buffer.Bytes())
 }
 
 // Prime the site
