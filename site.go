@@ -26,10 +26,10 @@ func (site *Site) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		statusCode = http.StatusNotFound
 		taxonomy = &Taxonomy{
 			FrontMatter: &FrontMatter{
-				Title: "404 Not Found",
-				Date:  time.Now(),
+				Title:       "404 Not Found",
+				Date:        time.Now(),
+				Description: "The requested page was not found.",
 			},
-			Markdown: "The requested page was not found.",
 		}
 	}
 
