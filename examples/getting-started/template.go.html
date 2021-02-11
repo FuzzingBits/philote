@@ -1,0 +1,12 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Philote Site</title>
+	</head>
+	<body>
+		<h1>Title: {{.Taxonomy.FrontMatter.Title}}</h1>
+		<p>Description: {{.Taxonomy.FrontMatter.Description}}</p>
+		{{.Taxonomy.Render}}
+	</body>
+</html>

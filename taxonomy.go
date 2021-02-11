@@ -25,7 +25,6 @@ type Taxonomy struct {
 // Render the markdown into HTML
 func (taxonomy *Taxonomy) Render() template.HTML {
 	return template.HTML(blackfriday.MarkdownCommon([]byte(taxonomy.Markdown)))
-
 }
 
 func (taxonomy *Taxonomy) readInContent(reader io.Reader) error {
@@ -103,7 +102,6 @@ func buildTaxonomy(startingDirectory string, startingPath string) (*Taxonomy, er
 			return nil, err
 		}
 		taxonomy.Children = append(taxonomy.Children, subTaxonomy)
-
 	}
 
 	sort.Slice(taxonomy.Children, func(p, q int) bool {

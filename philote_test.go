@@ -67,7 +67,6 @@ func testTaxonomy(t *testing.T, site *philote.Site, targetTaxonomy *philote.Taxo
 	}
 
 	deepEqual(t, targetTaxonomy, site.Taxonomy)
-
 }
 
 func deepEqual(t *testing.T, expected interface{}, got interface{}) {
