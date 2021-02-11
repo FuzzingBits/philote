@@ -9,8 +9,8 @@ Minimalist library to serve markdown content as webpages.
 [![License](https://img.shields.io/github/license/fuzzingbits/philote)](https://github.com/fuzzingbits/philote/blob/main/LICENSE)
 
 # Index
-- [Install](#install)
 - [Disclaimer](#disclaimer)
+- [Install](#install)
 - [Getting Started](#getting-started)
 - [Templates](#templates)
 - [Taxonomy](#taxonomy)
