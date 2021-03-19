@@ -60,7 +60,7 @@ http.ListenAndServe(":8090", site)
 	</body>
 </html>
 ```
-3. Create your first page (`.content/_index.md`):
+3. Create your first page (`.content/index.md`):
 ```md
 ---
 title: My First Page
@@ -82,14 +82,14 @@ The Site Taxonomy is automatically derived from the contents of the Content File
 - all files are used as pages with their path and base filename used as the URL
 	- Example: `./posts/hello-world.md` == `http://localhost:8000/posts/hello-world`
 - all files must be have the `.md` extension
-- every directory (including the root directory) must include a `_index.md` file.
+- every directory (including the root directory) must include a `index.md` file.
 
 Example:
 ```
-┌── _index.md
+┌── index.md
 ├── about.md
 └── posts
-    ├── _index.md
+    ├── index.md
     └── hello-world.md
 ```
 

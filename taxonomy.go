@@ -75,7 +75,7 @@ func buildTaxonomy(fsys fs.FS, startingDirectory string, startingPath string) (*
 
 		defer file.Close()
 
-		if fileName == "_index.md" {
+		if fileName == "index.md" {
 			if err := taxonomy.readInContent(file); err != nil {
 				return nil, err
 			}
