@@ -33,7 +33,7 @@ The following steps are how the [Getting Started Example](examples/getting-start
 ```go
 // Create your instance of the philote.Site
 site := &philote.Site{
-    ContentPath: "./content",
+    Content:  os.DirFS("./content"),
     Template: template.Must(template.ParseFiles("./template.go.html")),
 }
 
@@ -78,7 +78,7 @@ This is being served with [philote](https://github.com/fuzzingbits/philote).
 
 # Taxonomy
 
-The Site Taxonomy is automatically derived from the contents of the ContentPath:
+The Site Taxonomy is automatically derived from the contents of the Content FileSystem:
 - all files are used as pages with their path and base filename used as the URL
 	- Example: `./posts/hello-world.md` == `http://localhost:8000/posts/hello-world`
 - all files must be have the `.md` extension

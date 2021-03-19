@@ -3,6 +3,7 @@ package philote
 import (
 	"bytes"
 	"html/template"
+	"io/fs"
 	"net/http"
 	"time"
 
@@ -11,10 +12,10 @@ import (
 
 // Site is a philote site
 type Site struct {
-	ContentPath string
-	Template    *template.Template
-	Taxonomy    *Taxonomy
-	pathMap     map[string]*Taxonomy
+	Content  fs.FS
+	Template *template.Template
+	Taxonomy *Taxonomy
+	pathMap  map[string]*Taxonomy
 }
 
 // ServeHTTP the site based on the path provided
@@ -48,7 +49,10 @@ func (site *Site) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 // Prime the site
 func (site *Site) Prime() error {
 	var err error
-	site.Taxonomy, err = buildTaxonomy(site.ContentPath, "/")
+	site.Taxonomy, err = buildTaxonomy(site.Content, ".", "/")
+	if err != nil {
+		return err
+	}
 
 	site.pathMap = make(map[string]*Taxonomy)
 	site.mapTaxonomy(site.Taxonomy)

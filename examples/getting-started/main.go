@@ -3,6 +3,7 @@ package main
 import (
 	"html/template"
 	"net/http"
+	"os"
 
 	"github.com/fuzzingbits/philote"
 )
@@ -10,8 +11,8 @@ import (
 func main() {
 	// Create your instance of the philote.Site
 	site := &philote.Site{
-		ContentPath: "./content",
-		Template:    template.Must(template.ParseFiles("./template.go.html")),
+		Content:  os.DirFS("./content"),
+		Template: template.Must(template.ParseFiles("./template.go.html")),
 	}
 
 	// Prime the site

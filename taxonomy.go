@@ -4,8 +4,8 @@ import (
 	"errors"
 	"html/template"
 	"io"
+	"io/fs"
 	"io/ioutil"
-	"os"
 	"sort"
 	"strings"
 
@@ -49,8 +49,8 @@ func (taxonomy *Taxonomy) readInContent(reader io.Reader) error {
 	return nil
 }
 
-func buildTaxonomy(startingDirectory string, startingPath string) (*Taxonomy, error) {
-	files, err := ioutil.ReadDir(startingDirectory)
+func buildTaxonomy(fsys fs.FS, startingDirectory string, startingPath string) (*Taxonomy, error) {
+	files, err := fs.ReadDir(fsys, startingDirectory)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,8 @@ func buildTaxonomy(startingDirectory string, startingPath string) (*Taxonomy, er
 		fileName := f.Name()
 		filePath := startingDirectory + "/" + fileName
 		fullPath := startingPath + strings.TrimSuffix(fileName, ".md")
-		file, err := os.Open(startingDirectory + "/" + fileName)
+		filePath = strings.TrimPrefix(filePath, "./")
+		file, err := fsys.Open(filePath)
 		if err != nil {
 			return nil, err
 		}
@@ -83,7 +84,7 @@ func buildTaxonomy(startingDirectory string, startingPath string) (*Taxonomy, er
 		}
 
 		if f.IsDir() {
-			subTaxonomy, err := buildTaxonomy(filePath, fullPath+"/")
+			subTaxonomy, err := buildTaxonomy(fsys, filePath, fullPath+"/")
 			if err != nil {
 				return nil, err
 			}

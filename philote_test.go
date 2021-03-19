@@ -2,6 +2,7 @@ package philote_test
 
 import (
 	"encoding/json"
+	"os"
 	"reflect"
 	"testing"
 	"time"
@@ -11,7 +12,7 @@ import (
 
 func TestSuccess(t *testing.T) {
 	site := &philote.Site{
-		ContentPath: "./test_files/success",
+		Content: os.DirFS("./test_files/success"),
 	}
 
 	targetTaxonomy := &philote.Taxonomy{
