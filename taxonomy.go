@@ -2,6 +2,7 @@ package philote
 
 import (
 	"errors"
+	"fmt"
 	"html/template"
 	"io"
 	"io/fs"
@@ -12,6 +13,9 @@ import (
 	"github.com/russross/blackfriday"
 	"gopkg.in/yaml.v2"
 )
+
+// ErrMissingIndex is when a index.md file is missing
+var ErrMissingIndex = errors.New("missing Index")
 
 // Taxonomy is the overall structure of the page
 type Taxonomy struct {
@@ -63,6 +67,8 @@ func buildTaxonomy(fsys fs.FS, startingDirectory string, startingPath string) (*
 		taxonomy.Path = "/"
 	}
 
+	indexFound := false
+
 	for _, f := range files {
 		fileName := f.Name()
 		filePath := startingDirectory + "/" + fileName
@@ -79,6 +85,8 @@ func buildTaxonomy(fsys fs.FS, startingDirectory string, startingPath string) (*
 			if err := taxonomy.readInContent(file); err != nil {
 				return nil, err
 			}
+
+			indexFound = true
 
 			continue
 		}
@@ -103,6 +111,10 @@ func buildTaxonomy(fsys fs.FS, startingDirectory string, startingPath string) (*
 			return nil, err
 		}
 		taxonomy.Children = append(taxonomy.Children, subTaxonomy)
+	}
+
+	if !indexFound {
+		return nil, fmt.Errorf("%w: %s/index.md", ErrMissingIndex, startingDirectory)
 	}
 
 	sort.Slice(taxonomy.Children, func(p, q int) bool {
