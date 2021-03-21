@@ -15,7 +15,7 @@ import (
 )
 
 // ErrMissingIndex is when a index.md file is missing
-var ErrMissingIndex = errors.New("missing Index")
+var ErrMissingIndex = errors.New("missing index")
 
 // Taxonomy is the overall structure of the page
 type Taxonomy struct {
