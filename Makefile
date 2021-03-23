@@ -15,6 +15,7 @@ help: ## Display general help about this command
 build: build-go ## Build the application
 
 build-go:
+	@go generate
 
 lint: lint-go ## Lint the application
 
